@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const db = require("./databse.js");
+const db = require("./database.js");
 const morgan = require('moregan');
 const fs = requre('fs');
 
