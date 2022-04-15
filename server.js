@@ -13,7 +13,7 @@ app.use(express.json());
 const port = args.port || process.env.port || 5000
 
 const server = app.listen(port, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT$', HTTP_PORT))
+    console.log('App listening on port %PORT%'.replace('%PORT$', port))
 });
 
 app.get("/app/", (req,res,next) => {
