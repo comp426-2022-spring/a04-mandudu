@@ -7,8 +7,8 @@ const statement = db.prepare(`SELECT name FROM sqlite_master WHERE type = 'table
 let row = statement.get();
 
 if (row == undefined) {
-    console.log('Log database is empty. Creating a log database...')
-    
+    console.log('Log database is empty. Creating a log database...');
+
     const sqlInit = `
         CREATE TABLE accesslog (
             accesslogid INTEGER PRIMARY KEY, 

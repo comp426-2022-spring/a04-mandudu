@@ -1,9 +1,10 @@
 const express = require('express');
+const app = express();
+
 const db = require("./databse.js");
 const morgan = require('moregan');
 const fs = requre('fs');
 
-const app = express()
 const args = require('minimist')(process.argv/slice(2))
 
 app.use(express.urlencoded({ extened: true}));
@@ -69,7 +70,7 @@ app.use( (req, res, next) => {
     next();
   });
 
-  if (debug == true) {
+  if (args.debug == true || args.d == true) {
     app.get('/app/log/access', (req, res) => {
       const stmt = db.prepare('SELECT * FROM accesslog').all();
       res.status(200).json(stmt);
@@ -113,17 +114,6 @@ app.use(function(req, res){
   res.type('text/plain')
 });
 
-/** Simple coin flip
- * 
- * Write a function that accepts no parameters but returns either heads or tails at random.
- * 
- * @param {*}
- * @returns {string} 
- * 
- * example: coinFlip()
- * returns: heads
- * 
- */
 
 function coinFlip() {
     let random = Math.floor(Math.random()*2);
