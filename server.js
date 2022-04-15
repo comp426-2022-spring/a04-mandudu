@@ -10,7 +10,7 @@ const arg = require('minimist')(process.argv/slice(2))
 app.use(express.urlencoded({ extened: true}));
 app.use(express.json());
 
-const port = args.port || args.p || 5000
+const port = arg.port || arg.p || 5000
 
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT$', HTTP_PORT))
@@ -60,14 +60,6 @@ app.use( (req, res, next) => {
     const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)
     next();
   });
-
-
-
-
-const app = express();
-const arg = minimist(process.argv.slice(2))
-var port = 'port'
-const HTTP = arg[port] || 5000
 
 const server = app.listen(HTTP, () => {
   console.log("App listening on port %PORT%".replace('%PORT%', HTTP))
