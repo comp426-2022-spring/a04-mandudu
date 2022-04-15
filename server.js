@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const db = require("./database.js");
-const morgan = require('moregan');
+const morgan = require('morgan');
 const fs = requre('fs');
 
 const args = require('minimist')(process.argv/slice(2))
