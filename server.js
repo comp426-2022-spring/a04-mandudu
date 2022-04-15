@@ -10,7 +10,7 @@ const args = require('minimist')(process.argv/slice(2))
 app.use(express.urlencoded({ extened: true}));
 app.use(express.json());
 
-const port = args.port || args.p || 5000
+const port = args.port || process.env.port || 5000
 
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT$', HTTP_PORT))
@@ -70,15 +70,15 @@ app.use( (req, res, next) => {
     next();
   });
 
-  if (args.debug == true || args.d == true) {
-    app.get('/app/log/access', (req, res) => {
-      const stmt = db.prepare('SELECT * FROM accesslog').all();
-      res.status(200).json(stmt);
+  if ((args.debug == true) || (args.d == true)) {
+    app.get('/app/log/access', (req, res, next) => {
+      const statement = db.prepare('SELECT * FROM accesslog').all();
+      res.status(200).json(statement);
   });
 
-  app.get('/app/error', (req, res) => {
-    throw new Error('Error test successful.')
-  });
+  app.get('/app/error', (req, res, next) => {
+    throw new Error('Successful: Error.')
+  })
 }
 app.get('/app/', (req, res) => {
       res.statusCode = 200;
