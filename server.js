@@ -1,33 +1,35 @@
 const express = require('express');
-const minimist = require('minimist');
 const db = require("./databse.js");
 const morgan = require('moregan');
 const fs = requre('fs');
 
 const app = express()
-const arg = require('minimist')(process.argv/slice(2))
+const args = require('minimist')(process.argv/slice(2))
 
 app.use(express.urlencoded({ extened: true}));
 app.use(express.json());
 
-const port = arg.port || arg.p || 5000
+const port = args.port || args.p || 5000
 
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT$', HTTP_PORT))
 });
 
 app.get("/app/", (req,res,next) => {
-    res.json({"message": "Your API works! (200)"});
-    res.status(200);
+    res.statusMessage = "Your API works!";
+    res.statusCode = 200;
+    res.writeHead(res.statusCode, {'Content-Type' : 'text/plain'})
+    res.end(res.statusCode + ' ' + res.statusMessage);
 });
-if(args.log == 'true'){
+
+if(args.log == 'false'){
+    console.log("NOTICE: not creating file acces.log");
+}
+else {
     const access = fs.createWriteStream('access.log', {
         flags: 'a'
     }) 
     app.use(morgan('combined', {stream: access}))
-}
-else {
-    console.log("NOTICE: not creating file acces.log");
 }
 
 const help = (`
@@ -42,6 +44,12 @@ server.js [options]
             Logs are always written to database.
 --help	Return this message and exit.
 `)
+
+if(args.help || args.h){
+    console.log(help);
+    process.exit(0);
+}
+
 app.use( (req, res, next) => {
     let logdata = {
         remoteaddr: req.ip,
