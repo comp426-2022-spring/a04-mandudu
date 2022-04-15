@@ -61,10 +61,16 @@ app.use( (req, res, next) => {
     next();
   });
 
-const server = app.listen(HTTP, () => {
-  console.log("App listening on port %PORT%".replace('%PORT%', HTTP))
-});
+  if (debug == true) {
+    app.get('/app/log/access', (req, res) => {
+      const stmt = db.prepare('SELECT * FROM accesslog').all();
+      res.status(200).json(stmt);
+  });
 
+  app.get('/app/error', (req, res) => {
+    throw new Error('Error test successful.')
+  });
+}
 app.get('/app/', (req, res) => {
       res.statusCode = 200;
       res.statusMessage = 'OK';
