@@ -1,0 +1,27 @@
+{
+  "name": "a04-mandudu",
+  "version": "1.0.0",
+  "description": "a04-james",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a04-mandudu.git"
+  },
+  "author": "Jeong Ho Park",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a04-mandudu/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a04-mandudu#readme",
+  "dependencies": {
+    "better-sqlite3": "^7.5.1",
+    "express": "^4.17.3",
+    "fs": "^0.0.1-security",
+    "minimist": "^1.2.6",
+    "morgan": "^1.10.0"
+  }
+}
